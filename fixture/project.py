@@ -43,7 +43,9 @@ class ProjectHelper:
     def count(self):
         wd = self.app.wd
         self.open_projects_page()
-        return len(wd.find_elements_by_name("selected[]"))
+        table = wd.find_element_by_xpath("//body//table[3]")
+        table_rows = table.find_elements_by_tag_name("tr")
+        return len(table_rows)-2
 
     project_cache = None
 
@@ -54,7 +56,7 @@ class ProjectHelper:
             self.project_cache = []
             table = wd.find_element_by_xpath("//body//table[3]")
             table_rows = table.find_elements_by_tag_name("tr")
-            for row in table_rows[1: len(table_rows)]:
+            for row in table_rows[2: len(table_rows)]:
                 cells = row.find_elements_by_tag_name("td")
                 name = cells[0].text
                 status = cells[1].text
@@ -63,5 +65,22 @@ class ProjectHelper:
                 description = cells[4].text
                 self.project_cache.append(Project(name = name, status = status, enabled = enabled, view_status = view_status, description = description))
         return list(self.project_cache)
+
+    def delete_project(self, project):
+        wd = self.app.wd
+        self.select_project(project)
+        # submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete Project']").click()
+        wd.find_element_by_xpath("//input[@value='Delete Project']").click()
+        self.return_to_projects_page()
+        self.project_cache = None
+
+    def select_project(self, project):
+        wd = self.app.wd
+        self.open_projects_page()
+        wd.find_element_by_link_text(str(project.name)).click()
+
+
+
 
 
