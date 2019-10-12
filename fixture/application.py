@@ -1,6 +1,7 @@
 from selenium import webdriver
 from fixture.session import SessionHelper
 from selenium.common.exceptions import NoSuchElementException
+from fixture.project import ProjectHelper
 
 
 class Application:
@@ -16,10 +17,11 @@ class Application:
         self.wd.implicitly_wait(1)
         self.session = SessionHelper(self)
         self.base_url = base_url
+        self.project = ProjectHelper(self)
 
     def open_home_page(self):
         wd = self.wd
-        if not (wd.current_url.endswith("/addressbook/")):
+        if not (wd.current_url.endswith("/login_page.php")):
             wd.get(self.base_url)
 
     def is_valid(self):
