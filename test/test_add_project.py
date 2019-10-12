@@ -1,10 +1,10 @@
 from model.project import Project
 import string
 import random
-import sys
 
 def test_add_project(app):
     app.session.login("administrator", "root")
+    # project = json_projects
     symbols = string.ascii_letters + string.digits
     project = Project(name="Test"+"".join([random.choice(symbols) for i in range(random.randrange(3))]))
     old_projects_list = app.project.get_project_list()
