@@ -1,9 +1,14 @@
 {
- "web" : {
-    "baseUrl" : "http://localhost/mantisbt-1.2.20/mantisbt-1.2.20/manage_proj_create_page.php"
- },
- "webadmin" : {
-	"username" : "admin",
-    "password" : "secret"
- }
+  "web": {
+    "baseUrl": "http://localhost/mantisbt-1.2.20/mantisbt-1.2.20/manage_proj_create_page.php"
+  },
+  "webadmin": {
+    "username": "admin",
+    "password": "secret"
+  },
+  "ftp": {
+    "host" : "localhost",
+    "username": "mantis",
+    "password": "mantis"
+  }
 }
