@@ -2,10 +2,11 @@ from selenium import webdriver
 from fixture.session import SessionHelper
 from selenium.common.exceptions import NoSuchElementException
 from fixture.project import ProjectHelper
+from fixture.james import JamesHelper
 
 
 class Application:
-    def __init__(self, browser, base_url):
+    def __init__(self, browser, config):
         if browser=="firefox":
             self.wd = webdriver.Firefox()
         elif browser=="Chrome":
@@ -16,7 +17,9 @@ class Application:
             raise ValueError("Unrecognized browser %s" % browser)
         self.wd.implicitly_wait(1)
         self.session = SessionHelper(self)
-        self.base_url = base_url
+        self.james = JamesHelper(self)
+        self.config = config
+        self.base_url = config['web']['baseUrl']
         self.project = ProjectHelper(self)
 
     def open_home_page(self):
