@@ -3,6 +3,8 @@ from fixture.session import SessionHelper
 from selenium.common.exceptions import NoSuchElementException
 from fixture.project import ProjectHelper
 from fixture.james import JamesHelper
+from fixture.signup import SignupHelper
+from fixture.mail import MailHelper
 
 
 class Application:
@@ -18,6 +20,8 @@ class Application:
         self.wd.implicitly_wait(1)
         self.session = SessionHelper(self)
         self.james = JamesHelper(self)
+        self.signup = SignupHelper(self)
+        self.mail = MailHelper(self)
         self.config = config
         self.base_url = config['web']['baseUrl']
         self.project = ProjectHelper(self)
